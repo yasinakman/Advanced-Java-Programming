@@ -18,11 +18,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LocalDateSerializerTest {
     @Test
-    public void serialises_LocalDateTime() throws JsonProcessingException, IOException {
+    public void serialises_LocalDateTime() throws IOException {
         Writer jsonWriter = new StringWriter();
         JsonGenerator jsonGenerator = new JsonFactory().createGenerator(jsonWriter);
         SerializerProvider serializerProvider = new ObjectMapper().getSerializerProvider();
-        new LocalDateSerializer().serialize(LocalDate.of(2000, 1, 1), jsonGenerator, serializerProvider);
+        new LocalDateSerializer().serialize(LocalDate.of(2000, 1, 1), jsonGenerator,
+                serializerProvider);
         jsonGenerator.flush();
         assertThat(jsonWriter.toString(), is(equalTo("\"2000-01-01\"")));
     }
